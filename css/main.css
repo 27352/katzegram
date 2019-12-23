@@ -1,0 +1,126 @@
+body {
+    background-color: #ffffff;
+}
+#menu, #addNewUser {
+    text-align: center;
+    vertical-align: text-top;
+    max-width: 600px;
+    margin: auto;
+}
+.menu-title {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 21px;
+}
+.icon-left, .icon-right {
+    width: 36px;
+}
+.icon-left {
+    float: left;
+}
+.icon-right {
+    float: right;
+}
+#divider {
+    padding-top: 10px;
+    border-bottom: 1px solid #c0c0c0;
+}
+#posts {
+    padding-top: 20px;
+    max-width: 550px;
+    margin: auto;
+}
+.card-item {
+    vertical-align: text-bottom;
+    border: 1px solid #c0c0c0;
+}
+.card-header {
+    padding: 10px 10px 15px 10px;
+    vertical-align: text-bottom;
+}
+.card-title {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 21px;
+    padding-left: 10px;
+}
+.card-image img {
+    width: 548px;
+    cursor: pointer;
+}
+.card-text {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
+    padding: 10px 10px 15px 10px;
+    vertical-align: text-bottom;
+}
+.card-footer {
+    padding: 10px 10px 5px 10px;
+    text-align: left;
+}
+.card-footer .likes .info {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    float: left;
+    vertical-align: text-bottom;
+}
+.card-footer .info {
+    font-style: italic;
+}
+.card-footer .likeBtn {
+    float: right;
+}
+.spacer-vertical {
+    padding-top: 20px;
+}
+.likes a, a:visited {
+    color: #000000;
+}
+.likes a:hover {
+    color: orangered;
+}
+#usersInfo {
+    margin-top: 20px;
+    max-width: 600px;
+}
+#usersInfo th {
+    padding: 7px;
+    background-color: #d0d0d0;
+}
+#usersInfo tr {
+    background-color: #F1F8E9;
+}
+#usersInfo td {
+    padding: 3px;
+}
+#usersInfo tr.altRow {
+    background-color: #D6EAF8;
+}
+#addNewUser {
+    margin-top: 20px;
+    text-align: left;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+#addUserForm {
+    margin-top: 20px;
+    margin-left: 20px;
+    visibility: hidden;
+}
+#addUserForm input, textarea {
+    width: 200px;
+}
+#addUserForm textarea {
+    height: 100px;
+}
+#addUserForm td {
+    vertical-align: top;
+}
+#addUserLink {
+    text-align: right;
+}
+#addUserLink a, a:visited {
+    color: #000000;
+}
+#addUserLink a:hover {
+    color: orangered;
+}
