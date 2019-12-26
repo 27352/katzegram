@@ -24,6 +24,10 @@
     $json = implode(',', $jsn);
     echo "var profile = [ {$json} ][0];";
 
+    if ($_GET["start"] == 1) {
+        echo "setCookie({username: profile.username});";
+    }
+
     // Select user posts
     $sql = sprintf(
         "SELECT posts.*, users.username, users.fullname FROM posts "

@@ -6,7 +6,7 @@
         die(mysqli_error());
     }
 
-    $sql = "SELECT posts.*, users.username, users.fullname FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.post_id ASC";
+    $sql = "SELECT posts.*, users.username, users.fullname FROM posts INNER JOIN users ON posts.user_id = users.id";
     $res = $dbconn->query($sql);
     $jsn = array();
 

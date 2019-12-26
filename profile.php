@@ -61,7 +61,7 @@
                 </tr>
             </table>
         </div>
-        <div id="profilePosts">
+        <div id="posts">
         </div>
     </div>
     </form>

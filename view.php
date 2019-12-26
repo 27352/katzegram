@@ -7,13 +7,17 @@
     </script>
 </head>
 
-<body onload="displaySinglePost(post_item[0], true);">
-    <div id="main">
-        <?php require_once('includes/menu.php'); ?>
+<body onload="displayPost(post_item[0]);">
+    <center>
+        <div id="main">
+            <?php require_once('includes/menu.php'); ?>
 
-        <div id="posts">
+            <div id="posts">
+            </div>
+            <div id="comments">
+            </div>
         </div>
-    </div>
+    </center>
 </body>
 
 </html>

@@ -3,6 +3,38 @@
     w.spinner.src = "icon/spinner.gif";
 }(window));
 
+function setCookie(data) {
+    document.cookie = 'katze=' + JSON.stringify(data);
+}
+
+function readCookie() {
+    var info = document.cookie.split('katze=');
+    var data = {};
+
+    if (info.length > 0) {
+        data = JSON.parse(info[1]);
+    }
+
+    return data;
+}
+
+function go (destination) {
+    var usr = readCookie();
+    var url = '';
+
+    switch (destination) {
+        case 'profile':
+            url = 'profile.php?username=' + usr.username;
+            break;
+
+        case 'feed':
+            url = 'feed.php';
+            break;
+    }
+
+    location.replace(url);
+}
+
 function makeGetRequest (script, data, callback) {
     var url = (location.origin + '/' + script).replace(/#/, '') + '?' + buildQueryString(data);
     var xhr = new XMLHttpRequest();
@@ -112,7 +144,7 @@ function doStartUp (action) {
     sendRequest({
         script: dest,
         data: data,
-        location: 'profile.php?username=' + usrn
+        location: 'profile.php?start=1&username=' + usrn
     });
 }
 
@@ -148,13 +180,14 @@ function doNewPost(user_id) {
     });
 }
 
-function getCardView (item) {
+function getCardView (item, unlink) {
     var like = buildOnClick('doLike', [item.post_id]);
-    var cmnt = buildOnClick('doComment', [item.post_id]);
-    var view = buildOnClick('doView', [item.post_id]);
+    //var cmnt = buildOnClick('doComment', [item.post_id]);
+    var view = !unlink ? buildOnClick('doView', [item.post_id]) : '';
     var ptid = 'id=' + buildLikesNodeId(item.post_id);
     var date = new Date(item.datetime);
-    var info = 'posted by <a href="#">' + item.fullname + '</a> on ' + date.toDateString();
+    var info = 'posted by <a href="profile.php?username=' + item.username + '">' 
+             + item.fullname + '</a> on ' + date.toDateString();
 
     return '<div class="card-item">'
             + '<div class="card-image">'
@@ -170,17 +203,62 @@ function getCardView (item) {
         + '<div class="spacer-vertical"></div>';
 }
 
+function getCommentView(item) {
+    return '<div class="card-comment">'
+            + '<a href="profile.php?username=' + item.author_username + '">' + item.author_fullname + '</a>&nbsp;'
+            + item.comment_text
+         + '</div>'
+         + '<div class="spacer-vertical"></div>';
+}
+
 function displayPosts (posts) {
-    var node = document.getElementById('profilePosts');
-    var indx = posts.length;
+    var node = document.getElementById('posts');
+    var size = posts.length;
     var html = '';
 
-    while (indx--) {
-        html += getCardView(posts[indx])
+    while (size--) {
+        var item = posts[size];
+
+        if (item.image_url.indexOf('http') > -1) {
+            html += getCardView(item);
+        }
     }
 
     node.innerHTML = html;
-    console.log(html);
+
+    // Logic to display addNewPost link only for the logged in user
+    var link = document.getElementById('addNewPost');
+
+    if (!link) {
+        return;
+    }
+
+    var usrn = location.search.split('username=')[1].replace(/#/, '');
+    var info = readCookie();
+
+    if (info.username == usrn) {
+        document.getElementById('addNewPost').style.visibility = 'visible';
+    }
+}
+
+function displayPost (item) {
+    var node = document.getElementById('posts');
+    var html = '';
+
+    html += getCardView(item, true);
+    node.innerHTML = html;
+
+    if (comments && comments.length > 0) {
+        var node = document.getElementById('comments');
+        var size = comments.length;
+        var html = '';
+
+        while (size--) {
+            html += getCommentView(comments[size])
+        }
+
+        node.innerHTML = html;
+    }
 }
 
 function doLike (post_id) {
@@ -201,4 +279,8 @@ function doLike (post_id) {
             node.innerHTML = json.likes;
         }
     });
+}
+
+function doView (post_id) {
+    location.replace('view.php?post_id=' + post_id);
 }
