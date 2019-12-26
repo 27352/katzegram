@@ -5,7 +5,7 @@
     <script><?php require_once("includes/db_select_profile.php"); ?></script>
 </head>
 
-<body>
+<body onload="displayPosts(posts);">
     <center>
     <form name="newPostForm" id="newPostForm" action="" method="get">
     <div id="main">
@@ -60,6 +60,8 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div id="profilePosts">
         </div>
     </div>
     </form>

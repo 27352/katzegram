@@ -6,7 +6,6 @@
         die(mysqli_error());
     }
 
-    // Check if user already exists
     $sql = sprintf("SELECT * FROM users WHERE username= '%s'", $_GET["username"]);
     $res = $dbconn->query($sql);
     $jsn = array();
@@ -24,6 +23,23 @@
 
     $json = implode(',', $jsn);
     echo "var profile = [ {$json} ][0];";
+
+    // Select user posts
+    $sql = sprintf(
+        "SELECT posts.*, users.username, users.fullname FROM posts "
+        . "INNER JOIN users ON posts.user_id = users.id "
+        . "WHERE users.username = '%s'", $_GET["username"]);
+    $res = $dbconn->query($sql);
+    $jsn = array();
+
+    if ($res->num_rows > 0) {
+        while( $post = $res->fetch_assoc() ) {
+            array_push($jsn, assocToJson($post));
+        }
+    }
+
+    $json = implode(',', $jsn);
+    echo "var posts = [ {$json} ];";
 
     require_once("db_disconnect.php");
 ?>

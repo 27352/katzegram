@@ -11,6 +11,9 @@ a:hover {
 input, textarea {
     width: 200px;
 }
+textarea {
+    height: 100px;
+}
 td {
     vertical-align: top;
 }
@@ -65,4 +68,50 @@ td {
     padding-bottom: 20px;
     text-align: right;
     max-width: 600px;
+}
+#profilePosts {
+    margin-top: 20px;
+    max-width: 550px;
+}
+.card-item {
+    vertical-align: text-bottom;
+    border: 1px solid #c0c0c0;
+}
+.card-header {
+    padding: 10px 10px 15px 10px;
+    vertical-align: text-bottom;
+}
+.card-title {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 21px;
+    padding-left: 10px;
+}
+.card-image img {
+    width: 548px;
+    cursor: pointer;
+}
+.card-text {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
+    padding: 10px 10px 15px 10px;
+    vertical-align: text-bottom;
+}
+.card-footer {
+    padding: 10px 10px 5px 10px;
+    text-align: left;
+}
+.card-footer .likes .info {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    float: left;
+    vertical-align: text-bottom;
+}
+.card-footer .info {
+    font-style: italic;
+}
+.card-footer .likeBtn {
+    float: right;
+}
+.spacer-vertical {
+    padding-top: 20px;
 }

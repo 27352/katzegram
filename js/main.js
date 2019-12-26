@@ -1,6 +1,7 @@
-(function () {
-    (document.createElement('img')).src = "icon/spinner.gif";
-}());
+(function (w) {
+    w.spinner = document.createElement('img');
+    w.spinner.src = "icon/spinner.gif";
+}(window));
 
 function makeGetRequest (script, data, callback) {
     var url = (location.origin + '/' + script).replace(/#/, '') + '?' + buildQueryString(data);
@@ -29,6 +30,14 @@ function buildQueryString (data) {
 
     return qs.join('&');
 }
+
+function buildOnClick (name, params) {
+    return 'onclick=' + name + '(' + params.join(',') + ')';
+};
+
+function buildLikesNodeId (post_id) {
+    return 'likes-' + post_id;
+};
 
 function sendRequest(options) {
     makeGetRequest(options.script, options.data, function (response) {
@@ -100,27 +109,10 @@ function doStartUp (action) {
 
     usrn = data.username;
 
-    // makeGetRequest(dest, data, function (response) {
-    //     if (response.text === 'error') {
-    //         alert('Oops! Something went awry! Be back in a jiffy... or not');
-    //         return;
-    //     }
-
-    //     var json = JSON.parse(response.text);
-
-    //     if (json.msg !== 'success') {
-    //         alert(json.msg);
-
-    //         return;
-    //     }
-
-    //     location.replace('profile.php?username=' + usrn);
-    // });
-
     sendRequest({
         script: dest,
         data: data,
-        location: 'profile.php?username=' + profile.username
+        location: 'profile.php?username=' + usrn
     });
 }
 
@@ -156,3 +148,57 @@ function doNewPost(user_id) {
     });
 }
 
+function getCardView (item) {
+    var like = buildOnClick('doLike', [item.post_id]);
+    var cmnt = buildOnClick('doComment', [item.post_id]);
+    var view = buildOnClick('doView', [item.post_id]);
+    var ptid = 'id=' + buildLikesNodeId(item.post_id);
+    var date = new Date(item.datetime);
+    var info = 'posted by <a href="#">' + item.fullname + '</a> on ' + date.toDateString();
+
+    return '<div class="card-item">'
+            + '<div class="card-image">'
+            + '<img ' + view + ' src="' + item.image_url + '"></img>'
+            + '</div>'
+            + '<div class="card-text">' + item.description + '</div>'
+            + '<div class="card-footer">'
+                + '<span ' + ptid + '>' + item.likes + '</span>'
+                + '<span ' + like + '  class="likes">&nbsp;<a href="javascript:">likes</a>&nbsp;-&nbsp;</span>'
+                + '<span class="info">' + info + '</span>'
+            + '</div>'
+        + '</div>'
+        + '<div class="spacer-vertical"></div>';
+}
+
+function displayPosts (posts) {
+    var node = document.getElementById('profilePosts');
+    var indx = posts.length;
+    var html = '';
+
+    while (indx--) {
+        html += getCardView(posts[indx])
+    }
+
+    node.innerHTML = html;
+    console.log(html);
+}
+
+function doLike (post_id) {
+    var ptid = buildLikesNodeId(post_id);
+    var data = {post_id: post_id};
+    var node = document.getElementById(ptid);
+
+    node.innerHTML = '<img src="icon/spinner.gif" height=35 />';
+
+    makeGetRequest('includes/db_update_like.php', data, function (response) {
+        if (response.text === 'error') {
+            return;
+        }
+
+        var json = JSON.parse(response.text);
+
+        if (node) {
+            node.innerHTML = json.likes;
+        }
+    });
+}
