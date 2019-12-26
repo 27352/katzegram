@@ -18,15 +18,20 @@ M.TYZu7fuLHz.F5
 DROP TABLE IF EXISTS wuhlYcf1xv.users; CREATE TABLE wuhlYcf1xv.users
 (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  username varchar(25) NOT NULL,
+  username varchar(25) NOT NULL UNIQUE KEY,
   fullname varchar(25) NOT NULL,
-  description varchar(255) NOT NULL,
+  password BLOB NOT NULL,
+  photo_url varchar(255) NULL,
+  description varchar(255) NULL,
   post_count int(2) NOT NULL DEFAULT '0',
+  logged_in BOOLEAN DEFAULT TRUE,
   datetime TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB;
 
-INSERT INTO wuhlYcf1xv.users (username, fullname, description)
-VALUES ('steel.irons','Steel Irons','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+INSERT INTO wuhlYcf1xv.users (username, fullname, password, description)
+VALUES ('steel.irons','Steel Irons', AES_ENCRYPT('123456','secret'), 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+
+SELECT AES_DECRYPT(`pswd`, 'secret') AS `pswd` FROM `users` WHERE `email` = 'user6@example.com';
 
 INSERT INTO wuhlYcf1xv.users (username, fullname, description)
 VALUES ('svety.kat','Svety Kat', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
@@ -43,7 +48,7 @@ DROP TABLE IF EXISTS wuhlYcf1xv.posts; CREATE TABLE wuhlYcf1xv.posts
 
 INSERT INTO wuhlYcf1xv.posts (user_id, image_url, description)
 VALUES (1, 
-'https://instagram.fmia1-2.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/71214533_195708338260676_4586009137826630778_n.jpg?_nc_ht=instagram.fmia1-2.fna.fbcdn.net&_nc_cat=108&oh=24e44e3b1f394e72f358e19c989a6d17&oe=5E912F3C', 
+'https://instagram.fmia1-2.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/71214533_195708338260676_4586009137826630778_n.jpg',
 'Waiting by the side of the road, for day to break so we could go down into Los Angeles with dirty hands and worn out knees'
 );
 

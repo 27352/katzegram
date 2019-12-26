@@ -8,15 +8,16 @@
 
     $sql = sprintf(
         "INSERT INTO posts (user_id, image_url, description) "
-        ."VALUES ('%d','%d','%d')",
+        ."VALUES ('%d','%s','%s')",
         $_GET["user_id"],
         $_GET["image_url"],
         $_GET["description"]
     );
 
     $res = $dbconn->query($sql);
-    $msg = array("msg", $res ? "success" : "error");
-
+    $msg = $res ? "success" : "error";
+    $msg = array("msg" => $msg);
+    
     echo assocToJson($msg);
 
     require_once("db_disconnect.php");

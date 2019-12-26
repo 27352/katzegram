@@ -15,11 +15,13 @@
         $msg = sprintf("%s already exists.", $_GET["username"]);
     } else {
         $sql = sprintf(
-            "INSERT INTO users (username, fullname, description) "
-            ."VALUES ('%s','%s','%s')",
+            "INSERT INTO users (username, fullname, password, description, photo_url) "
+            ."VALUES ('%s','%s', AES_ENCRYPT('%s','secret'), '%s', '%s')",
             $_GET["username"],
             $_GET["fullname"],
-            str_replace("'", "\'", $_GET["description"])
+            str_replace("'", "\'", $_GET["password"]),
+            str_replace("'", "\'", $_GET["description"]),
+            $_GET["photo_url"]
         );
 
         $res = $dbconn->query($sql);

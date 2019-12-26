@@ -1,126 +1,68 @@
 body {
-    background-color: #ffffff;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
 }
-#menu, #addNewUser {
-    text-align: center;
+a, a:visited {
+    color: #000000;
+}
+a:hover {
+    color: orangered;
+}
+input, textarea {
+    width: 200px;
+}
+td {
+    vertical-align: top;
+}
+#menu {
     vertical-align: text-top;
     max-width: 600px;
     margin: auto;
 }
-.menu-title {
+#menuTitle {
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 21px;
 }
-.icon-left, .icon-right {
-    width: 36px;
-}
-.icon-left {
+#leftIcon {
     float: left;
 }
-.icon-right {
+#rightIcon {
     float: right;
 }
 #divider {
-    padding-top: 10px;
-    border-bottom: 1px solid #c0c0c0;
+    margin-top: 10px;
+    border-top: 1px solid #c0c0c0;
+    padding-bottom: 20px;
 }
-#posts {
-    padding-top: 20px;
-    max-width: 550px;
-    margin: auto;
+.headerText {
+    font-size: 18px;
+    padding-bottom: 20px;
 }
-.card-item {
-    vertical-align: text-bottom;
-    border: 1px solid #c0c0c0;
-}
-.card-header {
-    padding: 10px 10px 15px 10px;
-    vertical-align: text-bottom;
-}
-.card-title {
-    font-family: 'Varela Round', sans-serif;
-    font-size: 21px;
-    padding-left: 10px;
-}
-.card-image img {
-    width: 548px;
-    cursor: pointer;
-}
-.card-text {
-    font-family: 'Varela Round', sans-serif;
-    font-size: 16px;
-    padding: 10px 10px 15px 10px;
-    vertical-align: text-bottom;
-}
-.card-footer {
-    padding: 10px 10px 5px 10px;
-    text-align: left;
-}
-.card-footer .likes .info {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    float: left;
-    vertical-align: text-bottom;
-}
-.card-footer .info {
-    font-style: italic;
-}
-.card-footer .likeBtn {
-    float: right;
-}
-.spacer-vertical {
-    padding-top: 20px;
-}
-.likes a, a:visited {
-    color: #000000;
-}
-.likes a:hover {
-    color: orangered;
-}
-#usersInfo {
-    margin-top: 20px;
-    max-width: 600px;
-}
-#usersInfo th {
-    padding: 7px;
-    background-color: #d0d0d0;
-}
-#usersInfo tr {
-    background-color: #F1F8E9;
-}
-#usersInfo td {
-    padding: 3px;
-}
-#usersInfo tr.altRow {
-    background-color: #D6EAF8;
-}
-#addNewUser {
-    margin-top: 20px;
-    text-align: left;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 16px;
-    cursor: pointer;
-}
-#addUserForm {
-    margin-top: 20px;
-    margin-left: 20px;
-    visibility: hidden;
-}
-#addUserForm input, textarea {
-    width: 200px;
-}
-#addUserForm textarea {
-    height: 100px;
-}
-#addUserForm td {
-    vertical-align: top;
-}
-#addUserLink {
+.formLink {
     text-align: right;
 }
-#addUserLink a, a:visited {
-    color: #000000;
+#signUpForm, #loginForm {
+    width: 500px;
+    visibility: collapse;
+    border-bottom: 1px solid #c0c0c0;
 }
-#addUserLink a:hover {
-    color: orangered;
+#userProfile {
+    border: 1px solid #c0c0c0;
+    padding: 10px;
+    vertical-align: top;
+    max-width: 550px;
+}
+#userPhoto {
+    padding: 3px;
+    border: 1px solid #c0c0c0;
+    width: 200px;
+}
+#addNewPostForm{
+    visibility: collapse;
+}
+#addNewPost {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    text-align: right;
+    max-width: 600px;
 }
