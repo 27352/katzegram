@@ -65,12 +65,12 @@ DROP TABLE IF EXISTS wuhlYcf1xv.comments; CREATE TABLE wuhlYcf1xv.comments
 (
   comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   post_id INT NOT NULL,
-  author_user_id INT NOT NULL,
+  author_id INT NOT NULL,
   comment_text varchar(255) NOT NULL,
   datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB;
-INSERT INTO wuhlYcf1xv.comments (post_id, author_user_id, comment_text) values (1, 1, 'test comment');
-INSERT INTO wuhlYcf1xv.comments (post_id, author_user_id, comment_text) values (2, 1, 'test comment');
+INSERT INTO wuhlYcf1xv.comments (post_id, author_id, comment_text) values (1, 1, 'test comment');
+INSERT INTO wuhlYcf1xv.comments (post_id, author_id, comment_text) values (2, 1, 'test comment');
 
 */
 

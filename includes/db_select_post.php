@@ -9,7 +9,7 @@
     $pid = $_GET["post_id"];
     $sql = sprintf("SELECT comments.*, users.username as author_username, "
                     . "users.fullname as author_fullname "
-                    . "FROM comments INNER JOIN users ON comments.author_user_id = users.id "
+                    . "FROM comments INNER JOIN users ON comments.author_id = users.id "
                     . "WHERE comments.post_id = %d ORDER BY comments.comment_id DESC", $pid);
 
     $res = $dbconn->query($sql);

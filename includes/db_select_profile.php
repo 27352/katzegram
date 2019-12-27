@@ -25,7 +25,7 @@
     echo "var profile = [ {$json} ][0];";
 
     if ($_GET["start"] == 1) {
-        echo "setCookie({username: profile.username});";
+        echo "setCookie({username: profile.username, userid: profile.id});";
     }
 
     // Select user posts

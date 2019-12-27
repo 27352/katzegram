@@ -121,6 +121,22 @@ td {
     padding: 10px 10px 5px 10px;
     max-width: 528px;
 }
-.card-comment {
+.card-comment-odd, .card-comment-even {
     text-align: left;
+    padding: 7px 11px 7px 11px;
+}
+.card-comment-odd {
+    background-color:  #F1F8E0;
+}
+.card-comment-even {
+    background-color:  #EFF5FB;
+}
+#addComment {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    text-align: right;
+    max-width: 600px;
+}
+#addCommentForm {
+    visibility: collapse;
 }

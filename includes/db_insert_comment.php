@@ -7,14 +7,15 @@
     }
 
     $sql = sprintf(
-        "INSERT INTO comments (post_id, comment_text) "
-        ."VALUES ('%d','%d')",
+        "INSERT INTO comments (post_id, author_id, comment_text) "
+        ."VALUES ('%d', '%d', '%s')",
         $_GET["post_id"],
-        $_GET["comment_text"]
+        $_GET["author_id"],
+        str_replace("'", "\'", $_GET["comment_text"])
     );
 
     $res = $dbconn->query($sql);
-    $msg = array("msg", $res ? "success" : "error");
+    $msg = array("msg" => $res ? "success" : "error");
 
     echo assocToJson($msg);
 

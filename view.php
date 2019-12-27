@@ -9,14 +9,33 @@
 
 <body onload="displayPost(post_item[0]);">
     <center>
-        <div id="main">
-            <?php require_once('includes/menu.php'); ?>
+        <form name="newCommentForm" id="newCommentForm" action="" method="get">
+            <div id="main">
+                <?php require_once('includes/menu.php'); ?>
 
-            <div id="posts">
+                <div id="posts">
+                </div>
+                <div id="comments">
+                </div>
+                <div id="addComment">
+                    <a href="javascript: displayForm('addCommentForm')">Add Comment</a>
+                </div>
+                <div id="addCommentForm">
+                    <table cellspacing=0 cellpadding=10>
+                        <tr>
+                            <td>Your Comment:</td>
+                            <td><textarea name="comment_text"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td class="formLink" onclick="doNewComment(post_item[0])">
+                                <a href="#">Post It</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div id="comments">
-            </div>
-        </div>
+        </form>
     </center>
 </body>
 

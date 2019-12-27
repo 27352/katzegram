@@ -30,6 +30,10 @@ function go (destination) {
         case 'feed':
             url = 'feed.php';
             break;
+        
+        case 'explore':
+            url = 'explore.php';
+            break;
     }
 
     location.replace(url);
@@ -86,7 +90,7 @@ function sendRequest(options) {
             return;
         }
 
-        location.replace(options.location);
+        options.location && location.replace(options.location);
     });
 }
 
@@ -203,8 +207,8 @@ function getCardView (item, unlink) {
         + '<div class="spacer-vertical"></div>';
 }
 
-function getCommentView(item) {
-    return '<div class="card-comment">'
+function getCommentView(item, classId) {
+    return '<div class="' + classId + '">'
             + '<a href="profile.php?username=' + item.author_username + '">' + item.author_fullname + '</a>&nbsp;'
             + item.comment_text
          + '</div>'
@@ -248,16 +252,24 @@ function displayPost (item) {
     html += getCardView(item, true);
     node.innerHTML = html;
 
-    if (comments && comments.length > 0) {
-        var node = document.getElementById('comments');
+    var node = document.getElementById('comments');
+
+    if (node && comments && comments.length > 0) {
         var size = comments.length;
         var html = '';
 
         while (size--) {
-            html += getCommentView(comments[size])
+            html += getCommentView(
+                comments[size], 
+                size % 2 === 0 
+                    ? 'card-comment-even' 
+                    : 'card-comment-odd'
+            )
         }
 
         node.innerHTML = html;
+    } else {
+        node.innerHTML = 'No comments yet. Be the first to add a comment!';
     }
 }
 
@@ -283,4 +295,19 @@ function doLike (post_id) {
 
 function doView (post_id) {
     location.replace('view.php?post_id=' + post_id);
+}
+
+function doNewComment (post_item) {
+    var form = document.forms["newCommentForm"].elements;
+    var data = {
+        post_id: post_item.post_id,
+        author_id: readCookie().userid,
+        comment_text: form.comment_text.value
+    };
+
+    sendRequest({
+        script: 'includes/db_insert_comment.php',
+        data: data,
+        location: 'view.php?post_id=' + post_item.post_id
+    });
 }
