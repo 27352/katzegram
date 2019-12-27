@@ -311,3 +311,26 @@ function doNewComment (post_item) {
         location: 'view.php?post_id=' + post_item.post_id
     });
 }
+
+function drawMinicard(item) {
+   // <a href="profile.php?username=' + item.username + '">'
+    var location = "location.replace('profile.php?username=" + item.username  + "')";
+    return '<div class="mini-card" onclick="' + location + '">'
+        + '<div><img src="' + (item.photo_url || 'icon/kat-emoji.png') + '"></div>'
+        + '<div>' + item.username + '</div>'
+        + '</div>';
+}
+
+function displayPeople() {
+    if (people && people.length > 0) {
+        var node = document.getElementById('people');
+        var size = people.length;
+        var html = '';
+
+        while (size--) {
+            html += drawMinicard(people[size]);
+        }
+
+        node.innerHTML = html;
+    }
+}

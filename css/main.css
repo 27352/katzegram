@@ -17,7 +17,7 @@ textarea {
 td {
     vertical-align: top;
 }
-#menu {
+#menu, #main {
     vertical-align: text-top;
     max-width: 600px;
     margin: auto;
@@ -32,14 +32,17 @@ td {
 #rightIcon {
     float: right;
 }
-#divider {
+.divider {
     margin-top: 10px;
     border-top: 1px solid #c0c0c0;
     padding-bottom: 20px;
 }
-.headerText {
+.headerText, .headerTextLeft {
     font-size: 18px;
     padding-bottom: 20px;
+}
+.headerTextLeft {
+    text-align: left;
 }
 .formLink {
     text-align: right;
@@ -139,4 +142,21 @@ td {
 }
 #addCommentForm {
     visibility: collapse;
+}
+.mini-card {
+    border: 1px solid #c0c0c0;
+    text-align: center;
+    width: 80px;
+    cursor: pointer;
+    float: left;
+}
+.mini-card img {
+    width: 70px;
+    height: 70px;
+    object-fit:cover;
+    border-radius:50%;
+}
+.headerTextLeft {
+    clear: both;
+    margin-top: 30px;
 }
