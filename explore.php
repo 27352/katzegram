@@ -14,11 +14,8 @@
             <div class="headerTextLeft">
                 Discover People
             </div>
-            <div id="people"></div>
-            <div class="headerTextLeft">
-                Explore
+            <div id="people">
             </div>
-            <div id="posts">a</div>
         </div>
     </center>
 </body>

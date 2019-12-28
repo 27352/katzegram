@@ -7,7 +7,9 @@
 
 <body onload="displayPosts(posts);">
     <center>
-    <form name="newPostForm" id="newPostForm" action="" method="get">
+    <form name="newPostForm" id="newPostForm" action="includes/file_upload.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="user_id" value="<?php echo $row["id"]; ?>">
+    <input type="hidden" name="username" value="<?php echo $row["username"]; ?>">
     <div id="main">
         <?php require_once('includes/menu.php'); ?>
         <div class="headerText">
@@ -45,9 +47,13 @@
         </div>
         <div id="addNewPostForm">
             <table cellspacing=0 cellpadding=10>
-                <tr>
+                <!-- <tr>
                     <td>Image Url:</td>
                     <td><input type="text" name="image_url"></td>
+                </tr> -->
+                <tr>
+                    <td>Image:</td>
+                    <td><input type="file" name="image_file" id="image_file"></td>
                 </tr>
                 <tr>
                     <td>Description:</td>
@@ -55,7 +61,7 @@
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
-                    <td class="formLink" onclick="doNewPost(<?php echo $row["id"]; ?>)">
+                    <td class="formLink" onclick="doNewPost()">
                         <a href="#">Post It</a>
                     </td>
                 </tr>

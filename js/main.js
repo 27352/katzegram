@@ -8,11 +8,12 @@ function setCookie(data) {
 }
 
 function readCookie() {
+    // Ex: "katze={"username":"steel.irons","userid":"1"};
     var info = document.cookie.split('katze=');
     var data = {};
 
     if (info.length > 0) {
-        data = JSON.parse(info[1]);
+        data = JSON.parse(info[1].split(';')[0]);
     }
 
     return data;
@@ -165,28 +166,41 @@ function hasRequiredInfo(data, keys) {
     return result;
 }
 
-function doNewPost(user_id) {
+function doNewPost() {
     var form = document.forms["newPostForm"].elements;
     var data = {
-        image_url: form.image_url.value,
-        description: form.description.value,
-        user_id: user_id
+        image_file: form.image_file.value,
+        description: form.description.value
     };
 
-    if (!hasRequiredInfo(data, ['image_url', 'description'])) {
+    if (!hasRequiredInfo(data, ['image_file', 'description'])) {
         return;
     }
 
-    sendRequest({
-        script: 'includes/db_insert_post.php',
-        data: data,
-        location: 'profile.php?username=' + profile.username
-    });
+    document.forms[0].submit();
 }
+
+// function doNewPost(user_id) {
+//     var form = document.forms["newPostForm"].elements;
+//     var data = {
+//         image_url: form.image_url.value,
+//         description: form.description.value,
+//         user_id: user_id
+//     };
+
+//     if (!hasRequiredInfo(data, ['image_url', 'description'])) {
+//         return;
+//     }
+
+//     sendRequest({
+//         script: 'includes/db_insert_post.php',
+//         data: data,
+//         location: 'profile.php?username=' + profile.username
+//     });
+// }
 
 function getCardView (item, unlink) {
     var like = buildOnClick('doLike', [item.post_id]);
-    //var cmnt = buildOnClick('doComment', [item.post_id]);
     var view = !unlink ? buildOnClick('doView', [item.post_id]) : '';
     var ptid = 'id=' + buildLikesNodeId(item.post_id);
     var date = new Date(item.datetime);
@@ -215,17 +229,14 @@ function getCommentView(item, classId) {
          + '<div class="spacer-vertical"></div>';
 }
 
-function displayPosts (posts) {
+function displayPosts(posts) {
     var node = document.getElementById('posts');
     var size = posts.length;
     var html = '';
 
     while (size--) {
         var item = posts[size];
-
-        if (item.image_url.indexOf('http') > -1) {
-            html += getCardView(item);
-        }
+        html += getCardView(item);
     }
 
     node.innerHTML = html;
@@ -313,12 +324,14 @@ function doNewComment (post_item) {
 }
 
 function drawMinicard(item) {
-   // <a href="profile.php?username=' + item.username + '">'
     var location = "location.replace('profile.php?username=" + item.username  + "')";
-    return '<div class="mini-card" onclick="' + location + '">'
-        + '<div><img src="' + (item.photo_url || 'icon/kat-emoji.png') + '"></div>'
-        + '<div>' + item.username + '</div>'
-        + '</div>';
+
+    return '<tr class="mini-card" onclick="' + location + '">'
+            + '<td><img src="' + (item.photo_url || 'icon/kat-emoji.png') + '"></td>'
+            + '<td><b>' + item.username + '</b><br/><br/><i>' + item.description + '</i></td>'
+         + '</tr>'
+         + '<tr><td>&nbsp;</td><td><div class="divider">&nbsp;</div></td></tr>'
+
 }
 
 function displayPeople() {
@@ -331,6 +344,9 @@ function displayPeople() {
             html += drawMinicard(people[size]);
         }
 
-        node.innerHTML = html;
+        node.innerHTML = '<table><tr><td>'
+                        + '&nbsp;</td><td><div class="divider">&nbsp;</div>' 
+                        + html 
+                        + '</td></tr></table>';
     }
 }
