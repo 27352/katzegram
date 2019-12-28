@@ -1,0 +1,46 @@
+// Database Info
+https://remotemysql.com/databases.php
+solidity@gmx.com
+M.TYZu7fuLHz.F5
+
+https://remotemysql.com/phpmyadmin/
+User: wuhlYcf1xv/WUAVVGNlxg
+
+// Database Connection
+Server: remotemysql.com:3306
+User: wuhlYcf1xv
+Password: WUAVVGNlxg
+Db Name: wuhlYcf1xv
+
+// Create Tables
+DROP TABLE IF EXISTS wuhlYcf1xv.users; CREATE TABLE wuhlYcf1xv.users
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username varchar(25) NOT NULL UNIQUE KEY,
+  fullname varchar(25) NOT NULL,
+  password BLOB NOT NULL,
+  photo_url varchar(255) NULL,
+  description varchar(255) NULL,
+  post_count int(2) NOT NULL DEFAULT '0',
+  logged_in BOOLEAN DEFAULT TRUE,
+  datetime TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS wuhlYcf1xv.posts; CREATE TABLE wuhlYcf1xv.posts
+(
+  post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  image_url varchar(255) NOT NULL,
+  description varchar(255) NOT NULL,
+  likes int(6) NOT NULL DEFAULT '0',
+  datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS wuhlYcf1xv.comments; CREATE TABLE wuhlYcf1xv.comments
+(
+  comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  post_id INT NOT NULL,
+  author_id INT NOT NULL,
+  comment_text varchar(255) NOT NULL,
+  datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;
